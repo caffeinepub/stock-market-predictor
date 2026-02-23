@@ -68,6 +68,7 @@ export interface _SERVICE {
   >,
   'getStockPredictionsBySymbol' : ActorMethod<[string], Array<StockPrediction>>,
   'storeNewsArticle' : ActorMethod<[NewsArticle], bigint>,
+  'storePrediction' : ActorMethod<[StockPrediction], undefined>,
   'storeStockPrediction' : ActorMethod<[StockPrediction], bigint>,
   'transform' : ActorMethod<[TransformationInput], TransformationOutput>,
 }

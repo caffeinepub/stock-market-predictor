@@ -1,13 +1,12 @@
 # Specification
 
 ## Summary
-**Goal:** Fix prediction data loading issues and expand stock search coverage to include 100+ NSE-traded stocks.
+**Goal:** Fix the stock addition functionality to ensure new stocks can be successfully added and retrieved in the Stock Market Predictor application.
 
 **Planned changes:**
-- Fix prediction data retrieval logic to properly fetch and display predictions when users search for stocks
-- Add proper loading and error state handling for prediction data queries
-- Expand stock autocomplete list from 30 to 100+ NSE-traded stocks across various sectors
-- Populate backend predictions map with valid sample data for all stocks in the expanded autocomplete list
-- Ensure each prediction includes score, confidence level, timestamp, and contributing factors
+- Fix backend storePrediction method to properly persist new stock predictions to the predictionData HashMap
+- Verify and update frontend stock search autocomplete to include comprehensive NSE stocks
+- Add error handling and logging for stock addition workflow with validation for duplicate symbols and format checking
+- Ensure newly added stocks are searchable and retrievable through the system
 
-**User-visible outcome:** Users can search for a much wider range of NSE stocks (100+) and see prediction data load reliably for any selected stock, with proper loading indicators and error messages when applicable.
+**User-visible outcome:** Users can successfully add new stocks to the system, search for them using autocomplete, and view their predictions without errors. Failed additions will display clear error messages.

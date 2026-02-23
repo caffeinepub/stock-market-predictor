@@ -1,83 +1,26 @@
 {
   "schemaVersion": "1.0.0",
-  "projectStateVersion": 5,
-  "summary": "Stock predictor AI website that analyzes multiple factors including news, FII/DII buying and selling data, and stock chart patterns from sources like NSE India, Moneycontrol, Economic Times, Google News, and other business/political news sites to predict stock market movements",
-  "architectural_notes": [
-    "Data aggregation from multiple sources: NSE India, Moneycontrol, Economic Times, Google News, and blog sites",
-    "AI model needs to process: news sentiment, FII/DII trading data, and technical chart patterns",
-    "Consider rate limiting and caching strategies for third-party API calls",
-    "Stock chart pattern recognition may require image processing or time-series analysis libraries"
-  ],
+  "projectStateVersion": 3,
+  "summary": "New project",
+  "architectural_notes": [],
   "known_issues": [
-    "May need to handle API rate limits from news sources and financial data providers",
-    "Real-time data access from NSE India and Moneycontrol may require paid subscriptions or web scraping",
-    "News sentiment analysis accuracy depends on NLP model quality",
-    "Prediction data not loading/displaying correctly for searched stocks",
-    "Some stocks missing from search autocomplete/suggestions"
+    "Stocks are not being added to the system"
   ],
   "isFixRequest": true,
   "existing_features": [
     {
-      "id": "feature-create-main-homepage-with-stock-search-functionality-where-users-can-enter-stock-symbols-or-names-to-request-predictions",
-      "title": "Create main homepage with stock search functionality where users can enter stock symbols or names to request predictions",
+      "id": "feature-verify-that-the-frontend-stock-search-autocomplete-in-usestockautocomplete-ts-includes-all-necessary-nse-stocks-and-that-new-stocks-can-be-searched-for-after-being-added-to-the-backend",
+      "title": "Verify that the frontend stock search autocomplete in useStockAutocomplete.ts includes all necessary NSE stocks and that new stocks can be searched for after being added to the backend.",
       "reqIds": [
-        "REQ-8"
+        "REQ-2"
       ],
       "version": 1
     },
     {
-      "id": "feature-create-stock-prediction-results-page-that-displays-ai-prediction-bullish-bearish-neutral-confidence-level-and-detailed-breakdown-of-contributing-factors-including-news-sentiment-fii-dii-data-trends-and-identified-chart-patterns",
-      "title": "Create stock prediction results page that displays AI prediction (bullish/bearish/neutral), confidence level, and detailed breakdown of contributing factors including news sentiment, FII/DII data trends, and identified chart patterns",
+      "id": "feature-add-proper-error-handling-and-logging-to-the-stock-addition-workflow-so-that-failures-are-visible-and-diagnosable-include-validation-for-stock-symbol-format-and-duplicate-prevention",
+      "title": "Add proper error handling and logging to the stock addition workflow so that failures are visible and diagnosable. Include validation for stock symbol format and duplicate prevention.",
       "reqIds": [
-        "REQ-9"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-display-recent-news-articles-related-to-the-searched-stock-with-sentiment-indicators-positive-negative-neutral-on-the-prediction-results-page",
-      "title": "Display recent news articles related to the searched stock with sentiment indicators (positive/negative/neutral) on the prediction results page",
-      "reqIds": [
-        "REQ-10"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-display-fii-and-dii-buying-selling-data-trends-with-visual-charts-showing-net-investment-flow-over-recent-period-on-the-prediction-results-page",
-      "title": "Display FII and DII buying/selling data trends with visual charts showing net investment flow over recent period on the prediction results page",
-      "reqIds": [
-        "REQ-11"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-display-stock-price-chart-with-identified-chart-patterns-highlighted-and-annotated-on-the-prediction-results-page",
-      "title": "Display stock price chart with identified chart patterns highlighted and annotated on the prediction results page",
-      "reqIds": [
-        "REQ-12"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-implement-visual-design-theme-with-financial-market-aesthetic-using-professional-color-scheme-greens-for-bullish-reds-for-bearish-neutrals-for-base-clean-typography-suitable-for-data-heavy-content-and-dashboard-style-layout-with-clear-information-hierarchy-and-card-based-sections",
-      "title": "Implement visual design theme with financial market aesthetic using professional color scheme (greens for bullish, reds for bearish, neutrals for base), clean typography suitable for data-heavy content, and dashboard-style layout with clear information hierarchy and card-based sections",
-      "reqIds": [
-        "REQ-13"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-fix-the-prediction-data-retrieval-logic-to-ensure-predictions-are-properly-loaded-and-displayed-when-users-search-for-stocks-verify-that-the-backend-query-hooks-successfully-fetch-prediction-data-from-the-actor-and-handle-loading-error-states-appropriately",
-      "title": "Fix the prediction data retrieval logic to ensure predictions are properly loaded and displayed when users search for stocks. Verify that the backend query hooks successfully fetch prediction data from the actor and handle loading/error states appropriately.",
-      "reqIds": [
-        "REQ-14"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-expand-the-stock-autocomplete-list-in-usestockautocomplete-ts-to-include-a-comprehensive-list-of-nse-traded-stocks-beyond-the-current-30-major-stocks-add-at-least-100-commonly-traded-stocks-covering-different-sectors-to-improve-search-coverage",
-      "title": "Expand the stock autocomplete list in useStockAutocomplete.ts to include a comprehensive list of NSE-traded stocks beyond the current 30 major stocks. Add at least 100+ commonly traded stocks covering different sectors to improve search coverage.",
-      "reqIds": [
-        "REQ-15"
+        "REQ-3"
       ],
       "version": 1
     }
@@ -85,111 +28,9 @@
   "new_feature_requests": [
     {
       "id": "AR-1",
-      "summary": "Integrate news data from multiple sources (Google News, Economic Times, business/political news blogs)",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-2",
-      "summary": "Fetch and analyze FII and DII buying/selling data",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-3",
-      "summary": "Integrate NSE India data for stock information",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-4",
-      "summary": "Integrate Moneycontrol data source",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-5",
-      "summary": "Implement stock chart pattern recognition and analysis",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-6",
-      "summary": "Build AI prediction engine that factors in news sentiment, FII/DII data, and chart patterns",
-      "reqIds": [
-        "AR-1",
-        "AR-2",
-        "AR-5"
-      ],
-      "status": "pending"
-    },
-    {
-      "id": "AR-7",
-      "summary": "Create website interface to display predictions and analysis",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-8",
-      "summary": "Create a backend data structure to store and manage stock prediction data including stock symbol, prediction score, confidence level, timestamp, and contributing factors (news sentiment, FII/DII data, chart patterns)",
+      "summary": "Investigate and fix the backend logic that prevents new stocks from being added to the system. Ensure the storePrediction method in backend/main.mo properly persists new stock predictions to the predictionData HashMap.",
       "reqIds": [
         "REQ-1"
-      ],
-      "status": "pending"
-    },
-    {
-      "id": "AR-9",
-      "summary": "Implement backend functionality to fetch and parse news data from multiple sources: Google News, Economic Times, and general business/political news blogs that impact stock markets",
-      "reqIds": [
-        "REQ-2"
-      ],
-      "status": "pending"
-    },
-    {
-      "id": "AR-10",
-      "summary": "Implement backend functionality to fetch and parse FII (Foreign Institutional Investors) and DII (Domestic Institutional Investors) buying and selling data from NSE India and Moneycontrol",
-      "reqIds": [
-        "REQ-3"
-      ],
-      "status": "pending"
-    },
-    {
-      "id": "AR-11",
-      "summary": "Implement backend functionality to fetch stock price data and trading volumes from NSE India to enable chart pattern analysis",
-      "reqIds": [
-        "REQ-4"
-      ],
-      "status": "pending"
-    },
-    {
-      "id": "AR-12",
-      "summary": "Implement a news sentiment analysis system that processes news articles and assigns sentiment scores (positive, negative, neutral) with confidence levels to determine market impact",
-      "reqIds": [
-        "REQ-5"
-      ],
-      "status": "pending"
-    },
-    {
-      "id": "AR-13",
-      "summary": "Implement chart pattern recognition system that identifies common stock chart patterns (head and shoulders, double top/bottom, triangles, flags, support/resistance levels) from historical price data",
-      "reqIds": [
-        "REQ-6"
-      ],
-      "status": "pending"
-    },
-    {
-      "id": "AR-14",
-      "summary": "Create AI prediction engine that combines news sentiment scores, FII/DII buying/selling trends, and chart pattern analysis to generate stock movement predictions (bullish, bearish, neutral) with confidence levels",
-      "reqIds": [
-        "REQ-7"
-      ],
-      "status": "pending"
-    },
-    {
-      "id": "AR-17",
-      "summary": "Ensure backend data structures contain valid prediction data for all stocks in the expanded autocomplete list. Populate the predictions map with realistic sample data including prediction scores, confidence levels, timestamps, and contributing factors for each stock symbol.",
-      "reqIds": [
-        "REQ-16"
       ],
       "status": "pending"
     }

@@ -67,6 +67,7 @@ export interface backendInterface {
     getStockPredictionsBetweenTimes(startTime: Time, endTime: Time): Promise<Array<StockPrediction>>;
     getStockPredictionsBySymbol(symbol: string): Promise<Array<StockPrediction>>;
     storeNewsArticle(article: NewsArticle): Promise<bigint>;
+    storePrediction(prediction: StockPrediction): Promise<void>;
     storeStockPrediction(prediction: StockPrediction): Promise<bigint>;
     transform(input: TransformationInput): Promise<TransformationOutput>;
 }

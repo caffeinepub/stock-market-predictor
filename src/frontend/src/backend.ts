@@ -149,6 +149,7 @@ export interface backendInterface {
     getStockPredictionsBetweenTimes(startTime: Time, endTime: Time): Promise<Array<StockPrediction>>;
     getStockPredictionsBySymbol(symbol: string): Promise<Array<StockPrediction>>;
     storeNewsArticle(article: NewsArticle): Promise<bigint>;
+    storePrediction(prediction: StockPrediction): Promise<void>;
     storeStockPrediction(prediction: StockPrediction): Promise<bigint>;
     transform(input: TransformationInput): Promise<TransformationOutput>;
 }
@@ -320,6 +321,20 @@ export class Backend implements backendInterface {
             }
         } else {
             const result = await this.actor.storeNewsArticle(arg0);
+            return result;
+        }
+    }
+    async storePrediction(arg0: StockPrediction): Promise<void> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.storePrediction(to_candid_StockPrediction_n8(this._uploadFile, this._downloadFile, arg0));
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.storePrediction(to_candid_StockPrediction_n8(this._uploadFile, this._downloadFile, arg0));
             return result;
         }
     }

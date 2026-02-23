@@ -1,7 +1,18 @@
 import { RouterProvider, createRouter, createRoute, createRootRoute } from '@tanstack/react-router';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { Toaster } from '@/components/ui/sonner';
+import Layout from './components/Layout';
 import HomePage from './pages/HomePage';
 import PredictionResultsPage from './pages/PredictionResultsPage';
-import Layout from './components/Layout';
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 1000 * 60 * 5, // 5 minutes
+      retry: 1,
+    },
+  },
+});
 
 const rootRoute = createRootRoute({
   component: Layout,
@@ -30,5 +41,10 @@ declare module '@tanstack/react-router' {
 }
 
 export default function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router} />
+      <Toaster />
+    </QueryClientProvider>
+  );
 }

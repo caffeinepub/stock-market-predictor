@@ -93,6 +93,7 @@ export const idlService = IDL.Service({
       ['query'],
     ),
   'storeNewsArticle' : IDL.Func([NewsArticle], [IDL.Nat], []),
+  'storePrediction' : IDL.Func([StockPrediction], [], []),
   'storeStockPrediction' : IDL.Func([StockPrediction], [IDL.Nat], []),
   'transform' : IDL.Func(
       [TransformationInput],
@@ -190,6 +191,7 @@ export const idlFactory = ({ IDL }) => {
         ['query'],
       ),
     'storeNewsArticle' : IDL.Func([NewsArticle], [IDL.Nat], []),
+    'storePrediction' : IDL.Func([StockPrediction], [], []),
     'storeStockPrediction' : IDL.Func([StockPrediction], [IDL.Nat], []),
     'transform' : IDL.Func(
         [TransformationInput],

@@ -1,7 +1,7 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-23T21:37:47.546Z",
+  "generatedAt": "2026-02-23T22:06:54.348Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
@@ -11,39 +11,39 @@
     "implemented": 2,
     "items": [
       {
-        "id": "REQ-14",
-        "summary": "Fix the prediction data retrieval logic to ensure predictions are properly loaded and displayed when users search for stocks. Verify that the backend query hooks successfully fetch prediction data from the actor and handle loading/error states appropriately.",
-        "status": "implemented",
-        "plannedFiles": [
-          "frontend/src/hooks/useQueries.ts",
-          "frontend/src/pages/PredictionResultsPage.tsx",
-          "frontend/src/components/PredictionCard.tsx"
-        ],
-        "matchedFiles": [
-          "frontend/src/hooks/useQueries.ts",
-          "frontend/src/pages/PredictionResultsPage.tsx",
-          "frontend/src/components/PredictionCard.tsx"
-        ]
-      },
-      {
-        "id": "REQ-15",
-        "summary": "Expand the stock autocomplete list in useStockAutocomplete.ts to include a comprehensive list of NSE-traded stocks beyond the current 30 major stocks. Add at least 100+ commonly traded stocks covering different sectors to improve search coverage.",
-        "status": "implemented",
-        "plannedFiles": [
-          "frontend/src/hooks/useStockAutocomplete.ts",
-          "frontend/src/components/StockSearchBar.tsx"
-        ],
-        "matchedFiles": [
-          "frontend/src/hooks/useStockAutocomplete.ts",
-          "frontend/src/components/StockSearchBar.tsx"
-        ]
-      },
-      {
-        "id": "REQ-16",
-        "summary": "Ensure backend data structures contain valid prediction data for all stocks in the expanded autocomplete list. Populate the predictions map with realistic sample data including prediction scores, confidence levels, timestamps, and contributing factors for each stock symbol.",
+        "id": "REQ-1",
+        "summary": "Investigate and fix the backend logic that prevents new stocks from being added to the system. Ensure the storePrediction method in backend/main.mo properly persists new stock predictions to the predictionData HashMap.",
         "status": "unknown",
         "plannedFiles": [],
         "matchedFiles": []
+      },
+      {
+        "id": "REQ-2",
+        "summary": "Verify that the frontend stock search autocomplete in useStockAutocomplete.ts includes all necessary NSE stocks and that new stocks can be searched for after being added to the backend.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/hooks/useStockAutocomplete.ts",
+          "frontend/src/components/StockSearchBar.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/StockSearchBar.tsx"
+        ]
+      },
+      {
+        "id": "REQ-3",
+        "summary": "Add proper error handling and logging to the stock addition workflow so that failures are visible and diagnosable. Include validation for stock symbol format and duplicate prevention.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/pages/PredictionResultsPage.tsx",
+          "frontend/src/hooks/useQueries.ts",
+          "frontend/src/components/StockSearchBar.tsx",
+          "frontend/src/pages/HomePage.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/pages/PredictionResultsPage.tsx",
+          "frontend/src/hooks/useQueries.ts",
+          "frontend/src/components/StockSearchBar.tsx"
+        ]
       }
     ]
   },
@@ -51,18 +51,16 @@
     "backend/main.mo",
     "backend/migration.mo",
     "build-request.json",
-    "build-template/README.md",
     "feature_evidence.json",
     "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
+    "frontend/src/App.tsx",
     "frontend/src/backend.d.ts",
     "frontend/src/backend.ts",
-    "frontend/src/components/PredictionCard.tsx",
     "frontend/src/components/StockSearchBar.tsx",
     "frontend/src/declarations/backend.did.d.ts",
     "frontend/src/declarations/backend.did.js",
     "frontend/src/hooks/useQueries.ts",
-    "frontend/src/hooks/useStockAutocomplete.ts",
     "frontend/src/pages/PredictionResultsPage.tsx",
     "project_state.json",
     "scratch/component-selection.json",

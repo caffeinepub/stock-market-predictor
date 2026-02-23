@@ -1,28 +1,41 @@
 {
   "kind": "spec_vs_diff_report",
   "version": "1.0",
-  "generatedAt": "2026-02-23T21:37:47.544Z",
-  "summary": "The implementation successfully addresses all three requirements. REQ-14 (prediction data loading) is implemented via a new getStockPrediction query and useStockPrediction hook with proper error/loading handling. REQ-15 (expanded autocomplete) is fulfilled with 110+ NSE stocks across multiple sectors. REQ-16 (backend data structures) is satisfied through a migration file that populates predictionData with sample data for multiple stocks. All acceptance criteria appear to be met based on the diff evidence.",
+  "generatedAt": "2026-02-23T22:06:54.346Z",
+  "summary": "The diff implements all three requirements: backend stock addition fix with validation and logging (REQ-1), frontend stock search autocomplete with comprehensive NSE stocks (REQ-2), and error handling/validation throughout the workflow (REQ-3). All acceptance criteria appear to be addressed.",
   "missing_requirements": [],
   "hallucinated_features": [
     {
-      "description": "Migration module (backend/migration.mo) implementing data migration logic",
-      "reason": "The BuildRequest does not mention implementing a migration system or module. While this may be a valid technical approach to populate data, it was not explicitly requested.",
+      "description": "Migration module (backend/migration.mo) that resets predictionData HashMap to empty",
+      "reason": "The BuildRequest asked to fix stock addition functionality and preserve the existing predictionData HashMap structure. The migration module that clears all prediction data was not requested and could cause data loss.",
       "evidence": [
-        "backend/migration.mo",
-        "backend/main.mo"
+        "backend/migration.mo"
+      ]
+    },
+    {
+      "description": "Automatic mock prediction generation for new stocks with realistic random data including FII/DII flows, chart patterns, and sentiment scores",
+      "reason": "The BuildRequest only asked to fix the ability to add stocks, not to generate mock/synthetic prediction data. The mock data generation in generateMockPrediction function was not requested.",
+      "evidence": [
+        "frontend/src/hooks/useQueries.ts",
+        "frontend/src/pages/PredictionResultsPage.tsx"
+      ]
+    },
+    {
+      "description": "Auto-add stock functionality that automatically generates and stores predictions when a symbol is searched for the first time",
+      "reason": "The BuildRequest asked to fix stock addition, not to implement automatic prediction generation on search. This automatic behavior was not requested.",
+      "evidence": [
+        "frontend/src/pages/PredictionResultsPage.tsx"
       ]
     }
   ],
-  "confidence": 0.92,
+  "confidence": 0.85,
   "changed_files": [
     "backend/main.mo",
     "backend/migration.mo",
     "frontend-file-summaries.txt",
-    "frontend/src/components/PredictionCard.tsx",
+    "frontend/src/App.tsx",
     "frontend/src/components/StockSearchBar.tsx",
     "frontend/src/hooks/useQueries.ts",
-    "frontend/src/hooks/useStockAutocomplete.ts",
     "frontend/src/pages/PredictionResultsPage.tsx",
     "project_state.json"
   ]

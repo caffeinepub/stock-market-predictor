@@ -4,6 +4,7 @@ import Time "mo:core/Time";
 import OutCall "http-outcalls/outcall";
 import Map "mo:core/Map";
 import Array "mo:core/Array";
+import Debug "mo:core/Debug";
 import Migration "migration";
 
 (with migration = Migration.run)
@@ -75,6 +76,45 @@ actor {
     articleId;
   };
 
+  public shared ({ caller }) func storePrediction(prediction : StockPrediction) : async () {
+    let symbol = prediction.stockSymbol;
+    let isValidSymbol = validateStockSymbol(symbol);
+
+    let infoText = "Adding new stock prediction for symbol: " # symbol;
+
+    if (isValidSymbol) {
+      let existing = predictionData.get(symbol);
+      if (existing.isNull()) {
+        predictionData.add(symbol, prediction);
+        Debug.print(infoText # " - Successfully added!");
+      } else {
+        Debug.print("Stock symbol already exists: " # symbol);
+      };
+    } else {
+      Debug.print("Invalid stock symbol format: " # symbol);
+    };
+  };
+
+  func isFirstCharDigit(text : Text) : Bool {
+    if (text.size() > 0) {
+      let firstChar = text.toIter().next();
+      switch (firstChar) {
+        case (null) { false };
+        case (?char) { char >= '0' and char <= '9' };
+      };
+    } else {
+      false;
+    };
+  };
+
+  func validateStockSymbol(symbol : Text) : Bool {
+    let symbolLength = symbol.size();
+    if (symbolLength < 1 or symbolLength > 10) {
+      return false;
+    };
+    not isFirstCharDigit(symbol);
+  };
+
   public query ({ caller }) func getAuthor() : async Text {
     "blckrock";
   };
@@ -124,3 +164,4 @@ actor {
     ).map(func((_, prediction)) { prediction });
   };
 };
+
