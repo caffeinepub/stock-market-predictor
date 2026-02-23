@@ -1,0 +1,56 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Fix prediction data loading and expand stock search autocomplete coverage",
+  "requirements": [
+    {
+      "id": "REQ-14",
+      "summary": "Fix prediction data retrieval logic to ensure predictions load and display properly when users search for stocks",
+      "acceptanceCriteria": [
+        "Prediction data successfully loads for all stocks in the autocomplete list",
+        "Loading states display properly while fetching prediction data",
+        "Error messages are shown if prediction data fails to load",
+        "PredictionCard component renders with valid prediction data including movement direction, confidence level, and score"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/hooks/useQueries.ts",
+          "operation": "modify",
+          "description": "Review and fix the useStockPrediction query hook to ensure it properly fetches prediction data from the backend actor's getStockPrediction method. Verify error handling, loading states, and data transformation. Ensure the query is enabled only when a valid symbol and actor are available."
+        },
+        {
+          "path": "frontend/src/pages/PredictionResultsPage.tsx",
+          "operation": "modify",
+          "description": "Enhance error handling and loading state display for prediction data fetching. Ensure the page properly shows loading indicators while data is being fetched and displays clear error messages if the prediction data fails to load. Verify that the prediction data from useStockPrediction is correctly passed to the PredictionCard component."
+        },
+        {
+          "path": "frontend/src/components/PredictionCard.tsx",
+          "operation": "modify",
+          "description": "Add defensive checks to handle cases where prediction data might be incomplete or null. Ensure the component gracefully handles missing fields and displays appropriate fallback content when prediction data is unavailable."
+        }
+      ]
+    },
+    {
+      "id": "REQ-15",
+      "summary": "Expand stock autocomplete list to include 100+ NSE-traded stocks across various sectors",
+      "acceptanceCriteria": [
+        "Stock autocomplete includes at least 100 NSE-traded stocks across various sectors",
+        "Autocomplete filtering works correctly for both stock symbols and company names",
+        "Search results display properly ordered by relevance",
+        "Previously missing stocks are now available in search suggestions"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/hooks/useStockAutocomplete.ts",
+          "operation": "modify",
+          "description": "Expand the hardcoded NSE_STOCKS array from 30 stocks to at least 100 stocks covering multiple sectors (IT, Banking, Pharmaceuticals, Automobiles, FMCG, Energy, Metals, etc.). Add stocks like HDFCBANK, ICICIBANK, AXISBANK, KOTAKBANK, SBIN, INFY, TCS, WIPRO, HCLTECH, TECHM, SUNPHARMA, DRREDDY, CIPLA, MARUTI, TATAMOTORS, M&M, HINDUNILVR, ITC, NESTLEIND, BRITANNIA, RELIANCE, ONGC, BPCL, IOC, TATASTEEL, JSWSTEEL, HINDALCO, COALINDIA, NTPC, POWERGRID, and many more. Ensure the filtering logic continues to work correctly for both symbols and company names."
+        },
+        {
+          "path": "frontend/src/components/StockSearchBar.tsx",
+          "operation": "modify",
+          "description": "Verify that the autocomplete dropdown properly handles the expanded list of 100+ stocks. Ensure the suggestion limit (currently 10) and keyboard navigation work smoothly with the larger dataset. Add any necessary performance optimizations if needed for filtering larger lists."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "kind": "build_request",
+  "title": "Fix prediction data loading and expand stock search autocomplete coverage",
+  "projectName": "Stock Predictor AI",
+  "priority": "high",
+  "requirements": [
+    {
+      "id": "REQ-14",
+      "text": "Fix the prediction data retrieval logic to ensure predictions are properly loaded and displayed when users search for stocks. Verify that the backend query hooks successfully fetch prediction data from the actor and handle loading/error states appropriately.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-5"
+        ],
+        "quotes": [
+          "prediction data is not getting"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Prediction data successfully loads for all stocks in the autocomplete list",
+        "Loading states display properly while fetching prediction data",
+        "Error messages are shown if prediction data fails to load",
+        "PredictionCard component renders with valid prediction data including movement direction, confidence level, and score"
+      ]
+    },
+    {
+      "id": "REQ-15",
+      "text": "Expand the stock autocomplete list in useStockAutocomplete.ts to include a comprehensive list of NSE-traded stocks beyond the current 30 major stocks. Add at least 100+ commonly traded stocks covering different sectors to improve search coverage.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-5"
+        ],
+        "quotes": [
+          "some stocks are not even getting in search option"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Stock autocomplete includes at least 100 NSE-traded stocks across various sectors",
+        "Autocomplete filtering works correctly for both stock symbols and company names",
+        "Search results display properly ordered by relevance",
+        "Previously missing stocks are now available in search suggestions"
+      ]
+    },
+    {
+      "id": "REQ-16",
+      "text": "Ensure backend data structures contain valid prediction data for all stocks in the expanded autocomplete list. Populate the predictions map with realistic sample data including prediction scores, confidence levels, timestamps, and contributing factors for each stock symbol.",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-5"
+        ],
+        "quotes": [
+          "prediction data is not getting"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Backend predictions map contains entries for all stocks in the autocomplete list",
+        "Each prediction includes valid prediction score (-100 to 100), confidence level (0-100), timestamp, and contributing factors",
+        "getPrediction query successfully returns data for any stock symbol from the autocomplete list",
+        "Historical prediction data is available for chart visualization"
+      ]
+    }
+  ],
+  "constraints": [
+    "Do not change the single-actor backend architecture",
+    "Maintain existing data type definitions for StockPrediction and NewsArticle",
+    "Keep the existing authentication and query hooks structure intact"
+  ],
+  "nonGoals": [
+    "Implementing real-time data fetching from external APIs",
+    "Adding new prediction algorithms or sentiment analysis",
+    "Changing the visual design or layout of existing components",
+    "Modifying the routing structure or adding new pages"
+  ],
+  "imageRequirements": {
+    "required": [],
+    "edits": []
+  }
+}

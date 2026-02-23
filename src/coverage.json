@@ -1,0 +1,72 @@
+{
+  "kind": "coverage_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-23T21:37:47.546Z",
+  "sources": {
+    "buildRequest": true,
+    "implementationPlan": true
+  },
+  "requirements": {
+    "total": 3,
+    "implemented": 2,
+    "items": [
+      {
+        "id": "REQ-14",
+        "summary": "Fix the prediction data retrieval logic to ensure predictions are properly loaded and displayed when users search for stocks. Verify that the backend query hooks successfully fetch prediction data from the actor and handle loading/error states appropriately.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/hooks/useQueries.ts",
+          "frontend/src/pages/PredictionResultsPage.tsx",
+          "frontend/src/components/PredictionCard.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/hooks/useQueries.ts",
+          "frontend/src/pages/PredictionResultsPage.tsx",
+          "frontend/src/components/PredictionCard.tsx"
+        ]
+      },
+      {
+        "id": "REQ-15",
+        "summary": "Expand the stock autocomplete list in useStockAutocomplete.ts to include a comprehensive list of NSE-traded stocks beyond the current 30 major stocks. Add at least 100+ commonly traded stocks covering different sectors to improve search coverage.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/hooks/useStockAutocomplete.ts",
+          "frontend/src/components/StockSearchBar.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/hooks/useStockAutocomplete.ts",
+          "frontend/src/components/StockSearchBar.tsx"
+        ]
+      },
+      {
+        "id": "REQ-16",
+        "summary": "Ensure backend data structures contain valid prediction data for all stocks in the expanded autocomplete list. Populate the predictions map with realistic sample data including prediction scores, confidence levels, timestamps, and contributing factors for each stock symbol.",
+        "status": "unknown",
+        "plannedFiles": [],
+        "matchedFiles": []
+      }
+    ]
+  },
+  "changedFiles": [
+    "backend/main.mo",
+    "backend/migration.mo",
+    "build-request.json",
+    "build-template/README.md",
+    "feature_evidence.json",
+    "frontend-file-summaries.txt",
+    "frontend-implementation-plan.json",
+    "frontend/src/backend.d.ts",
+    "frontend/src/backend.ts",
+    "frontend/src/components/PredictionCard.tsx",
+    "frontend/src/components/StockSearchBar.tsx",
+    "frontend/src/declarations/backend.did.d.ts",
+    "frontend/src/declarations/backend.did.js",
+    "frontend/src/hooks/useQueries.ts",
+    "frontend/src/hooks/useStockAutocomplete.ts",
+    "frontend/src/pages/PredictionResultsPage.tsx",
+    "project_state.json",
+    "scratch/component-selection.json",
+    "spec.md",
+    "spec_vs_diff_report.json"
+  ]
+}

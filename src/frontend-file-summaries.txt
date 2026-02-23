@@ -1,0 +1,17 @@
+{
+  "frontend/src/App.tsx": "Main application component that sets up TanStack Router with routes for the homepage and prediction results page, wrapped in a Layout component for consistent structure.",
+  "frontend/src/components/Layout.tsx": "Layout wrapper component providing consistent header with branding, main content area with Outlet for route rendering, and footer with disclaimer and attribution.",
+  "frontend/src/pages/HomePage.tsx": "Homepage component featuring a hero section with background image, prominent stock search bar, and feature cards explaining the AI prediction capabilities.",
+  "frontend/src/pages/PredictionResultsPage.tsx": "Prediction results page that displays comprehensive stock analysis using the new useStockPrediction hook for main prediction data and useStockPredictions for historical data, with enhanced error messages guiding users to stocks with available prediction data.",
+  "frontend/src/components/StockSearchBar.tsx": "Reusable stock search component with autocomplete dropdown that filters 110+ NSE-listed stocks by symbol or company name, with keyboard navigation support and updated placeholder text.",
+  "frontend/src/components/PredictionCard.tsx": "Card component displaying stock prediction with defensive null checks, movement direction (bullish/bearish/neutral), confidence level progress bar, and prediction metadata with graceful fallback for missing data.",
+  "frontend/src/components/ContributingFactorsSection.tsx": "Component that breaks down and visualizes the three main contributing factors (news sentiment, FII/DII flow, chart patterns) with progress bars and detailed metrics.",
+  "frontend/src/components/NewsArticlesList.tsx": "List component displaying recent news articles with title, source, date, sentiment badges, and content preview in a card-based layout.",
+  "frontend/src/components/NewsSentimentBadge.tsx": "Badge component that displays sentiment classification (positive/negative/neutral) with appropriate color coding based on sentiment score.",
+  "frontend/src/components/FiiDiiChart.tsx": "Interactive line chart using Recharts to visualize FII and DII net investment flows over time with tooltips showing detailed buy/sell volumes.",
+  "frontend/src/components/StockPriceChart.tsx": "Line chart displaying prediction score trends over time with pattern detection annotations marked as reference dots and detailed tooltips.",
+  "frontend/src/hooks/useQueries.ts": "Custom React Query hooks for fetching stock predictions (single and historical), news articles, and historical data with proper error handling and loading states; includes new useStockPrediction hook that calls getStockPrediction for single prediction data.",
+  "frontend/src/hooks/useStockAutocomplete.ts": "Custom hook managing autocomplete logic for 110+ NSE-listed stocks across multiple sectors (Banking, IT, Energy, Automobiles, Pharmaceuticals, FMCG, Metals, Cement, Telecom, Retail, Infrastructure, etc.), providing filtered suggestions based on symbol or company name matching.",
+  "frontend/src/index.css": "Global styles with OKLCH-based financial market color system including bullish (green), bearish (red), and neutral colors for both light and dark modes, plus typography utilities.",
+  "frontend/tailwind.config.js": "Tailwind configuration extending the theme with financial market colors (bullish/bearish/neutral), custom fonts (Inter, JetBrains Mono), and enhanced shadows for professional data-heavy layouts."
+}
