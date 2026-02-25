@@ -1,0 +1,44 @@
+{
+  "kind": "spec_vs_diff_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-25T02:36:42.024Z",
+  "summary": "The diff addresses the 'Failed to Load Prediction' error across frontend hooks, the prediction results page, and child components. REQ-2 and REQ-3 are substantially implemented. REQ-1 (backend Motoko audit/fix) shows minimal evidence of actual safety fixes beyond adding a migration module that is largely a passthrough.",
+  "missing_requirements": [
+    {
+      "id": "REQ-1",
+      "requirement": "Audit and fix the backend Motoko actor to ensure all prediction-related query functions return valid data without runtime errors; verify safe Map lookups, optional unwrapping, and data access patterns that handle empty/missing states gracefully without trapping.",
+      "reason": "The added migration.mo is a trivial identity transform (run returns old unchanged). The truncated backend/main.mo diff does not show evidence of audited/fixed query functions with safe optional unwrapping, safe Map lookups, or guarded data access patterns. No specific runtime-error fixes to getHistoricalForecast, market call queries, daily stock picks, or options picks are visible in the diff.",
+      "evidence": [
+        "backend/migration.mo",
+        "backend/main.mo"
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "requirement": "Audit DailyOptionsPicksSection and MarketCallHistoryChart specifically to ensure they gracefully handle undefined/null/empty data and do not throw render errors.",
+      "reason": "The diff summary mentions DailyOptionsPicksSection and MarketCallHistoryChart were in scope, but neither file appears in the added/modified file list. No evidence of null guards or loading skeleton additions for these two components is present in the diff.",
+      "evidence": [
+        "frontend-file-summaries.txt"
+      ]
+    }
+  ],
+  "hallucinated_features": [
+    {
+      "description": "Local prediction generation fallback (generateEnrichedPrediction / buildLocalStockPrediction) used as permanent data source when backend is unavailable",
+      "reason": "The build request only asks for graceful error handling and user-friendly fallback messages, not for generating synthetic/local prediction data to silently substitute for real backend data. Silently substituting locally-generated fake predictions was not requested and could mislead users.",
+      "evidence": [
+        "frontend/src/hooks/useQueries.ts",
+        "frontend/src/pages/PredictionResultsPage.tsx"
+      ]
+    }
+  ],
+  "confidence": 0.72,
+  "changed_files": [
+    "backend/main.mo",
+    "backend/migration.mo",
+    "frontend-file-summaries.txt",
+    "frontend/src/hooks/useQueries.ts",
+    "frontend/src/pages/PredictionResultsPage.tsx",
+    "project_state.json"
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-audit-and-fix-the-react-query-hooks-in-usequeries-ts-to-ensure-prediction-fetch-calls-correctly-handle-loading-error-and-empty-states-ensure-the-actor-is-properly-initialized-before-queries-are-invoked-and-that-any-failed-fetch-produces-a-user-friendly-fallback-rather-than-a-broken-ui-state-fix-any-mismatches-between-backend-return-types-and-frontend-type-expectations",
+      "featureTitle": "Audit and fix the React Query hooks in useQueries.ts to ensure prediction fetch calls correctly handle loading, error, and empty states. Ensure the actor is properly initialized before queries are invoked, and that any failed fetch produces a user-friendly fallback rather than a broken UI state. Fix any mismatches between backend return types and frontend type expectations.",
+      "files": [
+        "frontend/src/hooks/useQueries.ts"
+      ],
+      "components": [
+        "http-outcalls@3.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-2"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-audit-predictionresultspage-tsx-and-all-child-components-predictioncard-contributingfactorssection-dailyoptionspickssection-fiidiichart-stockpricechart-marketcallhistorychart-to-ensure-each-component-gracefully-handles-undefined-null-empty-data-from-queries-and-does-not-throw-render-errors-add-proper-null-guards-and-loading-skeleton-states-where-missing",
+      "featureTitle": "Audit PredictionResultsPage.tsx and all child components (PredictionCard, ContributingFactorsSection, DailyOptionsPicksSection, FiiDiiChart, StockPriceChart, MarketCallHistoryChart) to ensure each component gracefully handles undefined/null/empty data from queries and does not throw render errors. Add proper null guards and loading skeleton states where missing.",
+      "files": [
+        "frontend/src/pages/PredictionResultsPage.tsx"
+      ],
+      "components": [
+        "http-outcalls@3.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-3"
+      ],
+      "confidence": "high"
+    }
+  ]
+}

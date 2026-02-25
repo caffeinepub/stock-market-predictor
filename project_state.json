@@ -1,0 +1,42 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 3,
+  "summary": "Stock analysis app with stock picks, multi-factor analysis, and option suggestions. Currently experiencing a 'failed to load prediction' error that needs to be fixed.",
+  "architectural_notes": [],
+  "known_issues": [
+    "'Failed to load prediction' error occurring in production (Version 9)"
+  ],
+  "isFixRequest": true,
+  "existing_features": [
+    {
+      "id": "feature-audit-and-fix-the-react-query-hooks-in-usequeries-ts-to-ensure-prediction-fetch-calls-correctly-handle-loading-error-and-empty-states-ensure-the-actor-is-properly-initialized-before-queries-are-invoked-and-that-any-failed-fetch-produces-a-user-friendly-fallback-rather-than-a-broken-ui-state-fix-any-mismatches-between-backend-return-types-and-frontend-type-expectations",
+      "title": "Audit and fix the React Query hooks in useQueries.ts to ensure prediction fetch calls correctly handle loading, error, and empty states. Ensure the actor is properly initialized before queries are invoked, and that any failed fetch produces a user-friendly fallback rather than a broken UI state. Fix any mismatches between backend return types and frontend type expectations.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-audit-predictionresultspage-tsx-and-all-child-components-predictioncard-contributingfactorssection-dailyoptionspickssection-fiidiichart-stockpricechart-marketcallhistorychart-to-ensure-each-component-gracefully-handles-undefined-null-empty-data-from-queries-and-does-not-throw-render-errors-add-proper-null-guards-and-loading-skeleton-states-where-missing",
+      "title": "Audit PredictionResultsPage.tsx and all child components (PredictionCard, ContributingFactorsSection, DailyOptionsPicksSection, FiiDiiChart, StockPriceChart, MarketCallHistoryChart) to ensure each component gracefully handles undefined/null/empty data from queries and does not throw render errors. Add proper null guards and loading skeleton states where missing.",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Audit and fix the backend Motoko actor to ensure all prediction-related query functions (stock predictions, market calls, daily stock picks, options picks) return valid data without runtime errors. Verify that all Map lookups, optional unwrapping, and data access patterns are safe and handle empty/missing states gracefully without trapping.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "status": "pending"
+    }
+  ],
+  "gameProjectType": "none",
+  "projectName": "Fix 'Failed to Load Prediction' Error",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

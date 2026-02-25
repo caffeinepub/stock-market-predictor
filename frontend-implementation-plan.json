@@ -1,0 +1,71 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Fix 'Failed to Load Prediction' Error - Frontend",
+  "requirements": [
+    {
+      "id": "REQ-2",
+      "summary": "Fix React Query hooks to handle loading, error, and empty states correctly, ensure actor initialization, and resolve type mismatches",
+      "acceptanceCriteria": [
+        "useQueries hooks properly await actor initialization before making calls",
+        "Query error states display a meaningful message rather than a broken component",
+        "Type mismatches between backend Candid responses and frontend types are resolved",
+        "Prediction results page loads without showing 'failed to load prediction' error"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/hooks/useQueries.ts",
+          "operation": "modify",
+          "description": "Add actor null checks before invoking backend methods in useStockPrediction, useNewsArticles, useMarketCalls, and useDailyOptionsPicks. Wrap all actor calls in try-catch blocks and return QueryError states with user-friendly messages. Fix type mismatches by ensuring Option<T> types from backend are properly unwrapped using __kind__ checks. Add explicit enabled flags that check actor !== null to prevent premature query execution. For useStockPrediction, handle the case where getHistoricalForecast returns an empty array gracefully. For useNewsArticles, handle getAllNewsFeeds returning empty arrays. For useMarketCalls, ensure getAllMarketCalls and getDaysMarketCall handle null/empty responses. For useDailyOptionsPicks, ensure getLastTradingDaysStockPicks handles the Option<Array<DailyStockPick>> return type correctly by checking __kind__ === 'Some' before accessing value."
+        }
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "summary": "Add null guards, loading skeletons, and empty states to PredictionResultsPage and all child components to prevent render errors",
+      "acceptanceCriteria": [
+        "No component throws a render error when prediction data is null or undefined",
+        "All chart components handle empty data arrays without crashing",
+        "Loading skeleton states are shown while data is being fetched",
+        "Empty state messages are shown when no prediction data is available for a symbol"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/PredictionResultsPage.tsx",
+          "operation": "modify",
+          "description": "Add comprehensive null/undefined guards for all query data before rendering child components. Show loading skeletons when isLoading is true for predictions, news, marketCalls, or dailyPicks. Display error messages when any query returns an error state instead of attempting to render child components. Add an empty state message when predictions array is empty or latest prediction is undefined. Ensure stockSymbol param is validated before passing to queries. Wrap each section (PredictionCard, ContributingFactorsSection, NewsArticlesList, DailyOptionsPicksSection, FiiDiiChart, StockPriceChart, MarketCallHistoryChart) in conditional renders that check data availability."
+        },
+        {
+          "path": "frontend/src/components/PredictionCard.tsx",
+          "operation": "modify",
+          "description": "Add prop type validation and early return guards to ensure prediction prop is defined and has all required fields before rendering. Add null checks for riskFactors, technicalIndicators arrays before mapping. Handle edge cases where confidenceScore, shortTermPriceTargetLower, shortTermPriceTargetUpper, or timestamp might be undefined. Display a fallback message if critical prediction data is missing instead of crashing."
+        },
+        {
+          "path": "frontend/src/components/ContributingFactorsSection.tsx",
+          "operation": "modify",
+          "description": "Add null guards for prediction prop and all nested fields (newsSentimentScore, fiiBuying, fiiSelling, diiBuying, diiSelling, technicalIndicators array). Ensure technicalIndicators.map operations check array existence and length before iterating. Handle undefined weightedScore values by defaulting to 0. Add early return with empty state message if prediction is null or technicalIndicators is empty."
+        },
+        {
+          "path": "frontend/src/components/DailyOptionsPicksSection.tsx",
+          "operation": "modify",
+          "description": "Add null check for picks prop at component entry. Return an empty state message when picks is null, undefined, or an empty array. Add null guards when accessing pick.trend, pick.fiiFlow, pick.globalCues, pick.newsSentiment before passing to FactorBadge. Handle cases where optional pick fields might be undefined. Ensure skeleton loading state is shown when isLoading is true."
+        },
+        {
+          "path": "frontend/src/components/FiiDiiChart.tsx",
+          "operation": "modify",
+          "description": "Add validation at component entry to check predictions array is defined and non-empty before processing. Return an empty state message or placeholder when predictions array is empty or undefined. Add null guards when accessing prediction.fiiBuying, prediction.fiiSelling, prediction.diiBuying, prediction.diiSelling, and prediction.timestamp. Ensure chartData array is validated before passing to Recharts LineChart. Handle edge case where all net flow values are zero gracefully."
+        },
+        {
+          "path": "frontend/src/components/StockPriceChart.tsx",
+          "operation": "modify",
+          "description": "Add validation to ensure predictions array exists and is non-empty before mapping. Return empty state message when predictions is null, undefined, or empty. Add null guards for prediction.shortTermPriceTargetLower, prediction.shortTermPriceTargetUpper, prediction.confidenceScore, and prediction.timestamp before adding to chartData. Ensure Recharts LineChart handles empty chartData gracefully by checking array length before render."
+        },
+        {
+          "path": "frontend/src/components/MarketCallHistoryChart.tsx",
+          "operation": "modify",
+          "description": "Add null check for marketCalls array at component entry. Return empty state message when marketCalls is null, undefined, or empty. Add guards when accessing marketCall.call, marketCall.confidenceScore, and marketCall.timestamp. Ensure chartData is validated before rendering Recharts ComposedChart. Handle edge cases where confidenceScore might be BigInt and needs safe conversion to number."
+        }
+      ]
+    }
+  ]
+}

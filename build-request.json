@@ -1,0 +1,76 @@
+{
+  "kind": "build_request",
+  "title": "Fix 'Failed to Load Prediction' Error",
+  "priority": "high",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "text": "Audit and fix the backend Motoko actor to ensure all prediction-related query functions (stock predictions, market calls, daily stock picks, options picks) return valid data without runtime errors. Verify that all Map lookups, optional unwrapping, and data access patterns are safe and handle empty/missing states gracefully without trapping.",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-6"
+        ],
+        "quotes": [
+          "it is saying that failed to load prediction, so recheck and make sure it works perfect"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Backend query functions return valid results (or empty arrays/null options) without trapping",
+        "No runtime errors occur when predictions, market calls, or daily picks are absent",
+        "All optional values are safely unwrapped before use"
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "text": "Audit and fix the React Query hooks in useQueries.ts to ensure prediction fetch calls correctly handle loading, error, and empty states. Ensure the actor is properly initialized before queries are invoked, and that any failed fetch produces a user-friendly fallback rather than a broken UI state. Fix any mismatches between backend return types and frontend type expectations.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-6"
+        ],
+        "quotes": [
+          "it is saying that failed to load prediction, so recheck and make sure it works perfect"
+        ]
+      },
+      "acceptanceCriteria": [
+        "useQueries hooks properly await actor initialization before making calls",
+        "Query error states display a meaningful message rather than a broken component",
+        "Type mismatches between backend Candid responses and frontend types are resolved",
+        "Prediction results page loads without showing 'failed to load prediction' error"
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "text": "Audit PredictionResultsPage.tsx and all child components (PredictionCard, ContributingFactorsSection, DailyOptionsPicksSection, FiiDiiChart, StockPriceChart, MarketCallHistoryChart) to ensure each component gracefully handles undefined/null/empty data from queries and does not throw render errors. Add proper null guards and loading skeleton states where missing.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-6"
+        ],
+        "quotes": [
+          "it is saying that failed to load prediction, so recheck and make sure it works perfect"
+        ]
+      },
+      "acceptanceCriteria": [
+        "No component throws a render error when prediction data is null or undefined",
+        "All chart components handle empty data arrays without crashing",
+        "Loading skeleton states are shown while data is being fetched",
+        "Empty state messages are shown when no prediction data is available for a symbol"
+      ]
+    }
+  ],
+  "constraints": [
+    "Do not change the backend data schema or state types",
+    "Do not modify files under frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useActor.ts, frontend/src/main.tsx, or frontend/src/components/ui"
+  ],
+  "nonGoals": [
+    "Adding new features or data fields",
+    "Changing the visual design or color theme",
+    "Modifying the migration.mo unless it is directly causing the prediction load failure"
+  ],
+  "imageRequirements": {
+    "required": [],
+    "edits": []
+  }
+}
